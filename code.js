@@ -23,19 +23,13 @@ function quicksort(array) {
     if (array.length <= 1) {
         return array;
     } else {
-        let left = 0;
-        let right = array.length;
-        while (left < right) {
-            let p = qsort(array, left, right);
-                if (p == left) {
-                p = qsort(array, ++left, right);
-            } else if (p == right) {
-                p = qsort(array, left, --right);
-            } else {
-                qsort(array, left, --p);
-                qsort(array, ++p, right);
-            }
+        let left = 0, right = array.length;
+        let pivot = qsort(array, left, right);
+        let nextRight = --pivot, nextLeft = ++pivot;
+        while (nextRight > left && nextLeft < right) {
+            qsort(array, left, --nextRight);
+            qsort(array, ++nextLeft, right);
         }
+        return array;
     }
-    return array;
 }

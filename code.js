@@ -24,13 +24,13 @@ function quicksort(array) {
     if (array.length <= 1) {
         return array;
     } else {
-        let left = 0, right = array.length;
+        let left = 0, right = array.length - 1;
         let pivot = qsort(array, left, right);
         let nextRight = --pivot, nextLeft = ++pivot;
         while (nextRight > left || nextLeft < right) {
             if (pivot == left) {
                 pivot = qsort(array, ++left, right);
-            } else if (pivot == right - 1) {
+            } else if (pivot == right) {
                 pivot = qsort(array, left, --right);
             } else {
                 qsort(array, left, --nextRight);

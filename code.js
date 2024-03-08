@@ -33,8 +33,8 @@ function quicksort(array) {
             } else if (pivot == right) {
                 pivot = qsort(array, left, right--);
             } else {
-                qsort(array, left, nextRight--);
-                qsort(array, nextLeft++, right);
+                pivot = qsort(array, left, nextRight--);
+                pivot = qsort(array, nextLeft++, right);
             }
         }
         return array;

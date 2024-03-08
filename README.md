@@ -53,8 +53,8 @@ function quicksort(array) {
             } else if (pivot == right) {
                 pivot = qsort(array, left, right--); // Partition the right subarray IF the maximum value is found
             } else { // Iteratively sort each subarray otherwise
-                qsort(array, left, nextRight--);
-                qsort(array, nextLeft++, right);
+                pivot = qsort(array, left, nextRight--);
+                pivot = qsort(array, nextLeft++, right);
             }
         }
         return array;

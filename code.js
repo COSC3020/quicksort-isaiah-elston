@@ -19,6 +19,7 @@ function qsort(array, left, right) {
     }
 }
 
+
 function quicksort(array) {
     if (array.length <= 1) {
         return array;
@@ -27,8 +28,14 @@ function quicksort(array) {
         let pivot = qsort(array, left, right);
         let nextRight = --pivot, nextLeft = ++pivot;
         while (nextRight > left || nextLeft < right) {
-            qsort(array, left, --nextRight);
-            qsort(array, ++nextLeft, right);
+            if (pivot == left) {
+                pivot = qsort(array, ++left, right);
+            } else if (pivot == right - 1) {
+                pivot = qsort(array, left, --right);
+            } else {
+                qsort(array, left, --nextRight);
+                qsort(array, ++nextLeft, right);
+            }
         }
         return array;
     }

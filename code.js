@@ -28,6 +28,13 @@ function quicksort(array) {
         let pivot = qsort(array, left, right);
         let nextRight = --pivot, nextLeft = ++pivot;
         while (nextRight > left || nextLeft < right) {
+            /*
+            The pivot could only be undefined if the array is already sorted, so this simply prevents
+             superfluous undefined elements in the array.
+            */
+            if (pivot == undefined) { 
+                return array;
+            }
             if (pivot == left) {
                 pivot = qsort(array, ++left, right);
             } else if (pivot == right) {
@@ -40,3 +47,7 @@ function quicksort(array) {
         return array;
     }
 }
+
+let test1 = [2, 0 , 1];
+
+console.log(quicksort(test1)); // [0, 1, 2]

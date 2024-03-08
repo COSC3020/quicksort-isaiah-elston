@@ -10,7 +10,7 @@ function qsort(array, left, right) {
     } else {
         let p = left;
         for (let i = (left + 1); i <= right; i++) {
-            if (array[i] <= array[left]) {
+            if (array[i] < array[left]) {
                 swap(array, ++p, i);
             }
         }
@@ -26,16 +26,10 @@ function quicksort(array) {
         let left = 0, right = array.length;
         let pivot = qsort(array, left, right);
         let nextRight = --pivot, nextLeft = ++pivot;
-        while (nextRight > left && nextLeft < right) {
+        while (nextRight > left || nextLeft < right) {
             qsort(array, left, --nextRight);
             qsort(array, ++nextLeft, right);
         }
         return array;
     }
 }
-
-let test1 = [2, -4, 6, 1, 5, -3, 3, 7];
-let test2 = [0, 1, 0];
-
-console.log(quicksort(test1));
-console.log(quicksort(test2));

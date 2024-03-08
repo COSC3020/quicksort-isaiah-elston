@@ -34,7 +34,7 @@ function quicksort(array) {
                 pivot = qsort(array, left, right--);
             } else {
                 pivot = qsort(array, left, nextRight--);
-                pivot = qsort(array, nextLeft++, right);
+                qsort(array, nextLeft++, right);
             }
         }
         return array;

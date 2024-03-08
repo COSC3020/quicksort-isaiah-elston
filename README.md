@@ -54,7 +54,7 @@ function quicksort(array) {
                 pivot = qsort(array, left, right--); // Partition the right subarray IF the maximum value is found
             } else { // Iteratively sort each subarray otherwise
                 pivot = qsort(array, left, nextRight--);
-                pivot = qsort(array, nextLeft++, right);
+                qsort(array, nextLeft++, right);
             }
         }
         return array;

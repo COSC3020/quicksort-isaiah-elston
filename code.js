@@ -5,7 +5,7 @@ function swap(array, left, right) {
 }
 
 function qsort(array, left, right) { 
-    if (left == right) {
+    if (left == right || left > right) {
         return;
     } else {
         let p = left;
@@ -28,26 +28,15 @@ function quicksort(array) {
         let pivot = qsort(array, left, right);
         let nextRight = --pivot, nextLeft = ++pivot;
         while (nextRight > left || nextLeft < right) {
-            /*
-            The pivot could only be undefined if the array is already sorted, so this simply prevents
-             superfluous undefined elements in the array.
-            */
-            if (pivot == undefined) { 
-                return array;
-            }
-            if (pivot == left) {
-                pivot = qsort(array, ++left, right);
+             if (pivot == left) {
+                pivot = qsort(array, left++, right);
             } else if (pivot == right) {
-                pivot = qsort(array, left, --right);
+                pivot = qsort(array, left, right--);
             } else {
-                qsort(array, left, --nextRight);
-                qsort(array, ++nextLeft, right);
+                qsort(array, left, nextRight--);
+                qsort(array, nextLeft++, right);
             }
         }
         return array;
     }
 }
-
-let test1 = [2, 0 , 1];
-
-console.log(quicksort(test1)); // [0, 1, 2]

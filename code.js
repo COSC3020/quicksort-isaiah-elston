@@ -5,33 +5,44 @@ function swap(array, left, right) {
 }
 
 function qsort(array, left, right) {
-	let p = left;
-	for (let i = left + 1; i <= right; i++) {
-		if (array[i] < array[left]) {
-			swap(array, ++p, i);
+	let currentPivotIndex = left;
+	for (let parserIndex = left + 1; parserIndex <= right; parserIndex++) {
+		if (array[parserIndex] < array[left]) {
+			swap(array, ++currentPivotIndex, parserIndex);
 		}
 	}
-	swap(array, left, p);
-	return p;
+	swap(array, left, currentPivotIndex);
+	return currentPivotIndex;
 }
 
 function quicksort(array) {
 	if (array.length <= 1) {
 		return array;
 	} else {
-		let left = 0;
-		let right = array.length - 1;
-		let p = qsort(array, left, right);
-		while (left < right) {
-			p = qsort(array, left, --p);
-			if (p == left) {
-				++left;
+		let left = 0,
+			right = array.length - 1;
+		let pivot = qsort(array, left, right);
+		let nextLeft = pivot + 1,
+			nextRight = pivot - 1;
+		let leftPivot = 0;
+		let rightPivot = nextRight;
+		while (left <= right) {
+			if (nextLeft > right) {
+				break;
 			}
-			p = qsort(array, ++p, right);
-			if (p == right) {
-				--right;
+			if (leftPivot == nextRight) {
+				leftPivot = qsort(array, left, nextRight--);
+			} else if (rightPivot == nextLeft) {
+				rightPivot = qsort(array, nextLeft++, right);
+			} else if (leftPivot == left) {
+				leftPivot = qsort(array, left++, nextRight);
+			} else if (rightPivot == right) {
+				rightPivot = qsort(array, nextLeft, right--);
+			} else {
+				leftPivot = qsort(array, left, nextRight);
+				rightPivot = qsort(array, nextLeft, right);
 			}
 		}
+		return array;
 	}
-	return array;
 }
